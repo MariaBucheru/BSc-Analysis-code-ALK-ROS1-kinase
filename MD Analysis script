@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 tim = timer.Timer()
 
 model = '2'
-directory = f'/home/maria/Project/ROS1_62IC+KIN_2/resultsmodel{model}IC62KIN_2/'
-base = f'model{model}IC62KIN_2-MD.part0001.'
+directory = f'/home/maria/Project/.../resultsmodel{model}.../'
+base = f'model{model}...-MD.part0001.'
 tpr = f'{directory}{base}gro'
 xtc = f'{directory}{base}xtc' 
 trr_file = f'{directory}{base}trr'
-pdb = 'corrected_xtc/trial/model2ROS1_2.pdb'
+pdb = 'corrected_xtc/trial/model....pdb'
 
-fig_path = f'/home/joyce/Project/Forces/Figures/ROS1_exp2/model{model}ROS1figs/'
+fig_path = f'/home/joyce/Project/Forces/Figures/.../model{model}...figs/'
 tp = 0
 
 u = mda.Universe(tpr,xtc)
