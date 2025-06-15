@@ -1,4 +1,4 @@
-load corrected_xtc/trial/model4ALK_2.pdb
+load corrected_xtc/trial/model....pdb
 orient
 
 directory = '/home/maria/Project/.../resultsmodel.../'
