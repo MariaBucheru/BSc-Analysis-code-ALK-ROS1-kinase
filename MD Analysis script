@@ -31,6 +31,9 @@ BB[0] = False
 BODY = np.isin(protein.resids , np.arange(19, 148))
 
 def uni2arr(u, selection):
+    '''
+    This function reads the coordinates from an MDAnalysis universe into a numpy array.
+    '''
     X = np.zeros((len(u.trajectory), len(selection), 3))
     for ix, frame in enumerate(u.trajectory):
         X[ix] = selection.positions
@@ -113,6 +116,9 @@ def nojump(X, B, ref=None):
     return X
 
 def refplot(X):
+    '''
+    Plotting the reference structure for the analysis, checking for artifacts.
+    '''
     ref = X[0]
     for k in [0, 1], [0, 2], [1, 2]:
         plt.scatter(*ref[:, k].T, c=-np.arange(len(ref)), cmap='turbo')
@@ -125,6 +131,9 @@ def refplot(X):
         plt.show()
 
 def rmsd_plot(X):
+    '''
+    Calculating the RMSD over time and plotting it.
+    '''
     X -= X.mean(axis=1, keepdims=True)
     ref = X[0]
     rgyr = (X ** 2).sum(axis=(1, 2)) / len(ref)
@@ -143,14 +152,17 @@ def rmsd_plot(X):
     print('RMSD over time')
     plt.show()
 
-def rmsd_plot(X):
+def rmsf_plot(X):
+    '''
+    Calculating the RMSF per residue and plotting it.
+    '''
     X -= X.mean(axis=1, keepdims=True)
     ref = X[0]
     rgyr = (X ** 2).sum(axis=(1, 2)) / len(ref)
     
     U, L, V = np.linalg.svd(ref.T @ X / len(ref))
     X = X @ (U @ V).transpose((0, 2, 1))
-    refrmsd = np.sqrt(np.maximum(0, rgyr[0] + rgyr - 2 * L.sum(axis=-1))) / 10
+    refrmsf = np.sqrt(np.maximum(0, rgyr[0] + rgyr - 2 * L.sum(axis=-1))) / 10
     
     plt.plot(refrmsd, color = 'magenta')
     plt.xlabel('time in ps')
@@ -159,7 +171,7 @@ def rmsd_plot(X):
     # tp = 'rmsd'
     # name = f'{fig_path}/{tp}model_{model}.png'
     # plt.savefig(name, dpi = 300, bbox_inches ='tight')
-    print('RMSD over time')
+    print('RMSF per residue')
     plt.show()
 
 def aligned_to_ref_coords(X, split_data):
