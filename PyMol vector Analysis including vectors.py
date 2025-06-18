@@ -9,8 +9,8 @@ xtc = f'{directory}{base}xtc'
 trr_file = f'{directory}{base}trr'
 
 run vectors.py
+#Where vectors.py is:
 
-Where vectors.py is:
 import trr
 import MDAnalysis as mda
 import numpy as np
